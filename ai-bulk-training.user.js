@@ -59,12 +59,13 @@
   }
 
   function promptCoinPairs() {
+    const markets = window.$(`#select_market option`).map(function() {return $(this).val();}).get();
     window
       .Sweetalert2({
         title: 'Bulk Add Coin Pairs',
         input: 'textarea',
+        inputValue: markets.join(", \n"),
         text: 'Input your coin pair list, comma seperated',
-        inputPlaceholder: 'BTC/USDT, ETH/USDT etc.',
         showCancelButton: true,
       })
       .then((result) => {
