@@ -14,26 +14,25 @@
   'use strict';
 
   function exportCoinList() {
-    const base = window.jQuery('#collect_currency').val().toUpperCase();
-    const coinPairs = window
-      .jQuery('#allowed_coins')
+    const base = jQuery('#collect_currency').val().toUpperCase();
+    const coinPairs = jQuery('#allowed_coins')
       .val()
       .map((coin) => `${coin}/${base}`)
       .join(', ');
 
     GM.setClipboard(coinPairs);
-    window.swal({ title: 'Success', text: 'Coinlist copied to clipboard!', type: 'success' });
+    swal({ title: 'Success', text: 'Coinlist copied to clipboard!', type: 'success' });
   }
 
   function addElements() {
-    const button = window.jQuery('<a href="#"><i class="fa fa-copy m-r-5"></i> Copy coinlist</a>');
-    const listItem = window.jQuery('<li></li>');
+    const button = jQuery('<a href="#"><i class="fa fa-copy m-r-5"></i> Copy coinlist</a>');
+    const listItem = jQuery('<li></li>');
     listItem.append(button);
 
-    window.jQuery('.page-title-box .dropdown-menu').append(listItem);
+    jQuery('.page-title-box .dropdown-menu').append(listItem);
 
     button.on('click', () => exportCoinList());
   }
 
-  window.jQuery(() => addElements());
+  jQuery(document).ready(() => addElements());
 })();
