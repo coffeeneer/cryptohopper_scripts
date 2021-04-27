@@ -15,7 +15,7 @@
 
   function trainCoinPairs(config, coinPairs, currentQueueSize) {
     if (coinPairs.length < 1) {
-      window.swal({
+      swal({
         title: 'Success',
         text: 'All available coin pairs added to training queue!',
         type: 'success',
@@ -23,9 +23,9 @@
       return finishTraining(currentQueueSize);
     }
 
-    if (currentQueueSize >= window.max_trainings) {
+    if (currentQueueSize >= max_trainings) {
       const pairsRemaining = coinPairs.join(', ');
-      window.swal({
+      swal({
         title: 'Full queue',
         text: `Training queue filled up! Remaining coins: ${pairsRemaining}`,
         type: 'error',
@@ -36,7 +36,7 @@
     const currentCoinPair = coinPairs.pop();
     console.log(`Starting training for coin pair ${currentCoinPair}...`);
 
-    window.doApiCall(
+    doApiCall(
       'trainai',
       {
         ...config,
@@ -45,7 +45,7 @@
       (_result) => {
         console.log(`${currentCoinPair} added to training queue`);
 
-        window.refreshAITrainings();
+        refreshAITrainings();
         setTimeout(() => trainCoinPairs(config, coinPairs, currentQueueSize + 1), 1200);
       },
       (error) => {
@@ -56,28 +56,28 @@
   }
 
   function finishTraining(currentQueueSize) {
-    window.jQuery('#learnAIButton').html('<i class="md md-android m-r-5"></i> Learn');
-    return window.setAILearnButton(currentQueueSize);
+    jQuery('#learnAIButton').html('<i class="md md-android m-r-5"></i> Learn');
+    return setAILearnButton(currentQueueSize);
   }
 
   function startTrainCoinPairs(coinPairs) {
     const config = {};
-    config.id = window.jQuery('#ai_id').val();
+    config.id = jQuery('#ai_id').val();
     if (config.id == 'new') {
-      return window.swal({ title: 'Error', text: 'You cannot train a new AI. Please save your AI first.', timer: 4e3, type: 'error' });
+      return swal({ title: 'Error', text: 'You cannot train a new AI. Please save your AI first.', timer: 4e3, type: 'error' });
     }
 
-    const button = window.jQuery('#learnAIButton');
+    const button = jQuery('#learnAIButton');
     button.html('<i class="fa fa-refresh fa-spin m-r-5"></i>');
     button.prop('disabled', true);
 
-    const strategy = window.jQuery('#selected_strategy_id option:selected');
-    config.exchange = window.jQuery('#select_exchange').val();
+    const strategy = jQuery('#selected_strategy_id option:selected');
+    config.exchange = jQuery('#select_exchange').val();
     config.strategy_id = strategy.val();
     config.strategy_type = strategy.data('type');
 
     // Get training queue and start training
-    window.doApiCall(
+    doApiCall(
       'loadaitraining',
       {
         id: config.id,
@@ -87,7 +87,7 @@
         const availablePairs = window
           .jQuery('#select_market option')
           .map(function () {
-            return window.jQuery(this).val();
+            return jQuery(this).val();
           })
           .get();
 
@@ -108,7 +108,7 @@
       },
       (error) => {
         swal({ title: 'Error', text: error, timer: 4e3, type: 'error' });
-        window.jQuery('#learnAIButton').html('<i class="md md-android m-r-5"></i> Learn');
+        jQuery('#learnAIButton').html('<i class="md md-android m-r-5"></i> Learn');
       }
     );
   }
@@ -132,24 +132,24 @@
   }
 
   function addElements() {
-    const style = window.jQuery('<style>.swal2-popup .swal2-textarea { color: #4c5667; }</style>');
-    const button = window.jQuery(
+    const style = jQuery('<style>.swal2-popup .swal2-textarea { color: #4c5667; }</style>');
+    const button = jQuery(
       '<button type="button" class="btn waves-effect waves-light btn-primary"><i class="md md-school m-r-5"></i> Bulk Learn</button>'
     );
-    const buttonGroup = window.jQuery('<div class="btn-group m-t-5" style="display: none;"></div>');
+    const buttonGroup = jQuery('<div class="btn-group m-t-5" style="display: none;"></div>');
     buttonGroup.append(button);
 
-    window.jQuery('body').prepend(style);
-    window.jQuery('#ai_designer_wrapper .btn-toolbar').append(buttonGroup);
+    jQuery('body').prepend(style);
+    jQuery('#ai_designer_wrapper .btn-toolbar').append(buttonGroup);
 
-    window.jQuery('#viewTrainingButton').on('click', () => {
+    jQuery('#viewTrainingButton').on('click', () => {
       buttonGroup.show();
     });
-    window.jQuery('#viewEditorButton, #viewResultsButton').on('click', () => {
+    jQuery('#viewEditorButton, #viewResultsButton').on('click', () => {
       buttonGroup.hide();
     });
     button.on('click', () => promptCoinPairs());
   }
 
-  window.jQuery(() => addElements());
+  jQuery(() => addElements());
 })();
