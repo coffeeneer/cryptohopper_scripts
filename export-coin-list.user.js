@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         CryptoHopper AI Coin List Exporter
+// @name         CryptoHopper Coin List Exporter
 // @namespace    https://github.com/coffeeneer/cryptohopper_scripts
 // @updateUrl    https://github.com/coffeeneer/cryptohopper_scripts/raw/main/export-coin-list.user.js
 // @version      0.1

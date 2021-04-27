@@ -23,16 +23,23 @@ The `ai-bulk-training.user.js` script adds a dialog option to the AI training pa
 
 ### Usage
 1. Navigate to the AI training page.
-2. Select your exchange
+2. Select your exchange.
 3. You will see a new button called "Bulk Learn", clicking this will open the dialog. ![Bulk Button](/docs/bulk_learn.png)
 4. Enter a comma seperated list of the coin pairs you want to train. ![Bulk Dialog](/docs/bulk_learn_popup.png)
 5. Click OK and watch it go!
 6. (optional) You can see some diagnostic logs in the console (F12 or ctrl-i). ![Bulk Logs](/docs/bulk_learn_logs.png)
 
 ## Export coin list (`export-coin-list.user.js`)
-The `export-coin-list.user.js` script adds an export action for the allowed coin list to the hopper configuration page.
+The `export-coin-list.user.js` script adds an export action for the allowed coin list to the hopper configuration page. This export will be in the correct format to use directly in the bulk training dialog.
 
 ### Usage
 1. Navigate to the hopper configuration page.
-2. Click the Actions dropdown
+2. Click the Actions dropdown.
 3. You will see a new action called "Copy coinlist", clicking this will copy the selected coins list to the clipboard. ![Export Action](/docs/export_coinlist_action.png)
+
+## Show all markets (`ai-show-all-markets.user.js`)
+The `ai-show-all-markets.user.js` script adds an option to show all hidden markets in the AI results page.
+
+### Usage
+1. Navigate to the AI results page
+2. You will see a new button called "Show hidden", clicking this will unhide all hidden markets in the table. ![Show Hidden](/docs/show_hidden.png)
