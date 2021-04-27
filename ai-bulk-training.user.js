@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         CryptoHopper AI Bulk Train
+// @name         CryptoHopper AI Bulk Training
 // @namespace    https://github.com/coffeeneer/cryptohopper_scripts
 // @updateUrl    https://github.com/coffeeneer/cryptohopper_scripts/raw/main/ai-bulk-training.user.js
 // @version      0.2
