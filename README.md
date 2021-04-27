@@ -22,7 +22,17 @@ You are responsible for the code you run on your own computer. By downloading an
 The `ai-bulk-training.user.js` script adds a dialog option to the AI training page where you can add a comma seperated list of coin pairs to train.
 
 ### Usage
-1. Navigate to the AI training page. You will see a new button called "Bulk Learn", clicking this will open the dialog. ![Bulk Button](/docs/bulk_learn.png)
-2. Enter a comma seperated list of the coin pairs you want to train. Keep in mind this list cannot be greater than the available slots for training (50 - amount of coins currently in the queue)! ![Bulk Dialog](/docs/bulk_learn_popup.png)
-3. Click OK and watch it go!
-4. (optional) You can see some diagnostic logs in the console (F12 or ctrl-i). ![Bulk Logs](/docs/bulk_learn_logs.png)
+1. Navigate to the AI training page.
+2. Select your exchange
+3. You will see a new button called "Bulk Learn", clicking this will open the dialog. ![Bulk Button](/docs/bulk_learn.png)
+4. Enter a comma seperated list of the coin pairs you want to train. ![Bulk Dialog](/docs/bulk_learn_popup.png)
+5. Click OK and watch it go!
+6. (optional) You can see some diagnostic logs in the console (F12 or ctrl-i). ![Bulk Logs](/docs/bulk_learn_logs.png)
+
+## Export coin list (`export-coin-list.user.js`)
+The `export-coin-list.user.js` script adds an export action for the allowed coin list to the hopper configuration page.
+
+### Usage
+1. Navigate to the hopper configuration page.
+2. Click the Actions dropdown
+3. You will see a new action called "Copy coinlist", clicking this will copy the selected coins list to the clipboard. ![Export Action](/docs/export_coinlist_action.png)
