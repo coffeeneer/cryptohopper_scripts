@@ -55,12 +55,7 @@
     );
   }
 
-  function finishTraining(currentQueueSize) {
-    jQuery('#learnAIButton').html('<i class="md md-android m-r-5"></i> Learn');
-    return setAILearnButton(currentQueueSize);
-  }
-
-  function startTrainCoinPairs(coinPairs) {
+  function startTrainingCoinPairs(coinPairs) {
     const config = {};
     config.id = jQuery('#ai_id').val();
     if (config.id == 'new') {
@@ -113,6 +108,11 @@
     );
   }
 
+  function finishTraining(currentQueueSize) {
+    jQuery('#learnAIButton').html('<i class="md md-android m-r-5"></i> Learn');
+    return setAILearnButton(currentQueueSize);
+  }
+
   function promptCoinPairs() {
     window
       .swal({
@@ -124,9 +124,10 @@
       })
       .then((result) => {
         if (result.value) {
-          const coinPairList = result.value.split(',');
+          const coinPairList = Array.from(new Set(result.value.split(',').map((pair) => pair.trim())).values());
           console.log(coinPairList);
-          startTrainCoinPairs(coinPairList.map((pair) => pair.trim()));
+
+          startTrainingCoinPairs(coinPairList);
         }
       });
   }
