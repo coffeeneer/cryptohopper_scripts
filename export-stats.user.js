@@ -5,7 +5,7 @@
 // @version      0.1
 // @description  Add a more feature rich stats exporter to the trade overview
 // @author       coffeeneer
-// @match        https://www.cryptohopper.com/config
+// @match        https://www.cryptohopper.com/trade-history
 // @icon         https://www.google.com/s2/favicons?domain=www.cryptohopper.com
 // @grant        none
 // ==/UserScript==
@@ -14,7 +14,6 @@
     'use strict';
 
     function exportStats(dateRange, startBalance) {
-        const url = '/export_trade_history.php';
         const params = new URLSearchParams({
             type: 'csv',
             timezone: timezoneOffset(),
@@ -24,12 +23,42 @@
             arbitrage: 0,
         });
 
-        fetch(url, {
-            method: 'GET',
-            body: params,
-        }).then((res) => {
-            console.log(res);
-        });
+        fetch('/export_trade_history.php?' + params)
+            .then((res) => res.text())
+            .then((history) => {
+                const lines = history.split('\n');
+                // Remove header
+                lines.splice(0, 1);
+
+                const buyOrders = new Map();
+
+                for (const line of lines) {
+                    const trade = {};
+                    ({
+                        0: trade.date,
+                        1: trade.id,
+                        2: trade.orderId,
+                        3: trade.currency,
+                        4: trade.pair,
+                        5: trade.type,
+                        6: trade.orderAmount,
+                        7: trade.orderRate,
+                        8: trade.orderValue,
+                        9: trade.orderCurrency,
+                        10: trade.fee,
+                        11: trade.trigger,
+                        12: trade.result,
+                        13: trade.buyOrderId,
+                    } = line.split(','));
+
+                    if (trade.type === 'buy') {
+                        buyOrders.set(trade.id, trade);
+                    } else {
+                        const buyOrder = buyOrders.get(trade.buyOrderId);
+                        console.log(trade, buyOrder);
+                    }
+                }
+            });
     }
 
     function getStatsInput() {
@@ -48,11 +77,13 @@
     }
 
     function addElements() {
+        const style = jQuery('<style>.swal2-popup .swal2-input { color: #4c5667; }</style>');
         const button = jQuery(
             '<button type="button" class="btn btn-primary waves-effect waves-light">Export Stats</button>'
         );
 
-        jQuery('.exportDiv .text-right').append(button);
+        jQuery('body').prepend(style);
+        jQuery('#exportDiv .text-right').append(button);
 
         button.on('click', () => getStatsInput());
     }

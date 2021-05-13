@@ -11,23 +11,23 @@
 // ==/UserScript==
 
 (function () {
-  'use strict';
+    'use strict';
 
-  function showAllMarkets() {
-    jQuery('#best_scoring_markets_table tr').show();
-  }
+    function showAllMarkets() {
+        jQuery('#best_scoring_markets_table tr').show();
+    }
 
-  function addElements() {
-    const button = jQuery('<a href="#">Show hidden &gt;</a>');
-    const col = jQuery('<div class="col-md-12"></div>');
-    const row = jQuery('<div class="row"></div>');
-    col.append(button);
-    row.append(col);
+    function addElements() {
+        const button = jQuery('<a href="#">Show hidden &gt;</a>');
+        const col = jQuery('<div class="col-md-12"></div>');
+        const row = jQuery('<div class="row"></div>');
+        col.append(button);
+        row.append(col);
 
-    jQuery('#best_scoring_markets_table').parent().before(row);
+        jQuery('#best_scoring_markets_table').parent().before(row);
 
-    button.on('click', () => showAllMarkets());
-  }
+        button.on('click', () => showAllMarkets());
+    }
 
-  jQuery(document).ready(() => addElements());
+    jQuery(document).ready(() => addElements());
 })();
