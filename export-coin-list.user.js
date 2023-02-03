@@ -2,7 +2,7 @@
 // @name         CryptoHopper Coin List Exporter
 // @namespace    https://github.com/coffeeneer/cryptohopper_scripts
 // @updateUrl    https://github.com/coffeeneer/cryptohopper_scripts/raw/main/export-coin-list.user.js
-// @version      0.1
+// @version      0.1.1
 // @description  Add an export option for the coin list on the Crypto Hopper Hopper config page
 // @author       coffeeneer
 // @match        https://www.cryptohopper.com/config
@@ -29,7 +29,7 @@
     const listItem = jQuery('<li></li>');
     listItem.append(button);
 
-    jQuery('.page-title-box .dropdown-menu').append(listItem);
+    jQuery('.c-page-heading__actions .btn-group .dropdown-menu').append(listItem);
 
     button.on('click', () => exportCoinList());
   }
