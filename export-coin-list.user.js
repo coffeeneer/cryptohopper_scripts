@@ -29,7 +29,7 @@
     const listItem = jQuery('<li></li>');
     listItem.append(button);
 
-    jQuery('.page-title-box .dropdown-menu').append(listItem);
+    jQuery('.btn-group.pull-right .dropdown-menu').append(listItem);
 
     button.on('click', () => exportCoinList());
   }
